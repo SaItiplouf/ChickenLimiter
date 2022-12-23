@@ -24,4 +24,4 @@
 - Real time protection may need to be disabled for components to function as expected.
 - This was originally built off D2SoloEnabler by DrNoLife & Woof.
 
-![image](https://user-images.githubusercontent.com/120452681/209246501-3cb7b93e-5aff-4cff-be30-ffaecb92fc8c.png)
+![image](https://user-images.githubusercontent.com/120452681/209246710-f202d338-c1a3-4cd2-9262-b677cd86a5d2.png)
