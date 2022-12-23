@@ -1,5 +1,5 @@
 # ChickenLimiter
-<img src="https://i.ibb.co/h2F30LT/1-2-minecraft-chicken-png.png" width="350" height="350" align="right" />
+<img src="https://i.ibb.co/h2F30LT/1-2-minecraft-chicken-png.png" width="350" height="400" align="right" />
 
 **Netlimiter alternative created by a real chicken**
 - Automatic blocking of selected Firewall Ports with an easy to use UI to gain an advantage in Destiny 2 as recently 'Netlimiter 4 Pro' was flagged by Battleye.
@@ -24,5 +24,5 @@
 - Real time protection may need to be disabled for components to function as expected.
 - This was originally built off D2SoloEnabler by DrNoLife & Woof.
 
-![image](https://user-images.githubusercontent.com/108382118/203904620-516ca2aa-1154-4d80-b430-a2239db374b9.png)
+![image]([https://user-images.githubusercontent.com/108382118/203904620-516ca2aa-1154-4d80-b430-a2239db374b9.png](https://i.ibb.co/WHPdj78/Screenshot-7.png))
 
