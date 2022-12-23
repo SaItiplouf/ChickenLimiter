@@ -1,7 +1,7 @@
 # WoofLimiter
-<img src="https://user-images.githubusercontent.com/108382118/203905299-4e51cf7b-ce96-4948-a7bd-1858f44cc195.png" width="350" height="350" align="right" />
+<img src="https://i.ibb.co/h2F30LT/1-2-minecraft-chicken-png.png" width="350" height="350" align="right" />
 
-**Netlimiter alternative created by woof#8834**
+**Netlimiter alternative created by a real chicken**
 - Automatic blocking of selected Firewall Ports with an easy to use UI to gain an advantage in Destiny 2 as recently 'Netlimiter 4 Pro' was flagged by Battleye.
 
 **Filtered Firewall ports with the use of Hotkeys (unalterable)**
@@ -12,7 +12,7 @@
 
 **Extra Application/Functionality**
 - Game pauser (Used to prevent Joining Allies in Destiny 2)
-- DiscordRPC
+- DiscordRPC (gonna be fucked soon)
 
 **When the application is closed**
 - Firewall rules are automatically deleted.

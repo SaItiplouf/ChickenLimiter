@@ -26,41 +26,52 @@ namespace WoofLimiter
         static readonly string PortRange30K = "30000-30009";
         static readonly string Rule27K = "27K by woof";
         static readonly string PortRange27K = "27000-27100";
+                static readonly string Rule7500 = "7500 by woof";
+        static readonly string PortRange7500 = "7500-7509";
+
 
 
         public static readonly DependencyProperty IsLimiterActive3074 =
-            DependencyProperty.Register("IsLimiterActivePort1", typeof(bool), typeof(NetlimiterV2),
+            DependencyProperty.Register("IsLimiterActivePort", typeof(bool), typeof(NetlimiterV2),
             new PropertyMetadata(false, OnPropertyIsLimiterActiveChanged));
 
         public static readonly DependencyProperty IsLimiterActive30K =
-            DependencyProperty.Register("IsLimiterActivePort2", typeof(bool), typeof(NetlimiterV2),
+            DependencyProperty.Register("IsLimiterActivePort1", typeof(bool), typeof(NetlimiterV2),
             new PropertyMetadata(false, OnPropertyIsLimiterActiveChanged1));
 
         public static readonly DependencyProperty IsLimiterActive27K =
-            DependencyProperty.Register("IsLimiterActivePort3", typeof(bool), typeof(NetlimiterV2),
+            DependencyProperty.Register("IsLimiterActivePort2", typeof(bool), typeof(NetlimiterV2),
             new PropertyMetadata(false, OnPropertyIsLimiterActiveChanged2));
+
+        public static readonly DependencyProperty IsLimiterActive75K =
+            DependencyProperty.Register("IsLimiterActivePort3", typeof(bool), typeof(NetlimiterV2),
+            new PropertyMetadata(false, OnPropertyIsLimiterActiveChanged3));    
 
      
         private bool _initializing;
 
-        public bool IsLimiterActivePort1
+        public bool IsLimiterActivePort
         {
             get { return (bool)GetValue(IsLimiterActive3074); }
             set { SetValue(IsLimiterActive3074, value); }
         }
 
-        public bool IsLimiterActivePort2
+        public bool IsLimiterActivePort1
         {
             get { return (bool)GetValue(IsLimiterActive30K); }
             set { SetValue(IsLimiterActive30K, value); }
         }
 
-        public bool IsLimiterActivePort3
+        public bool IsLimiterActivePort2
         {
             get { return (bool)GetValue(IsLimiterActive27K); }
             set { SetValue(IsLimiterActive27K, value); }
         }
-
+        public bool IsLimiterActivePort3
+        {
+            get { return (bool)GetValue(IsLimiterActive75K); }
+            set { SetValue(IsLimiterActive75K, value); }
+        }
        
         private bool _enableHotkey = true;
         private HotKey _woofEnablerHotkey = null;
@@ -68,6 +79,8 @@ namespace WoofLimiter
         private HotKey _woofEnablerHotkey1 = null;
         private bool _enableHotkey2 = true;
         private HotKey _woofEnablerHotkey2 = null;
+        private bool _enableHotkey3 = true;
+        private HotKey _woofEnablerHotkey3 = null;
         
 
         public NetlimiterV2()
@@ -76,15 +89,15 @@ namespace WoofLimiter
             InitializeResources();
            
             string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            Computer.Content = "Welcome " + userName;
+            Computer.Content = "Bienvenue " + userName;
          //DiscordRPC
             DataContext = this;
             this.handlers = default(DiscordRpc.EventHandlers);
             DiscordRpc.Initialize("1043814073697050624", ref this.handlers, true, null);
             this.handlers = default(DiscordRpc.EventHandlers);
            DiscordRpc.Initialize("1043814073697050624", ref this.handlers, true, null);
-            this.presence.details = "I'm a netlimiting cheater!";
-            this.presence.state = "made by woof#8834";
+            this.presence.details = "Burning Chickens";
+            this.presence.state = "made by Saltiplouf#7821";
            this.presence.largeImageKey = "woof-netlimiter";
            this.presence.smallImageKey = "woof-netlimiter";
            this.presence.largeImageText = "";
@@ -92,9 +105,10 @@ namespace WoofLimiter
             this.presence.startTimestamp = DateTimeOffset.Now.ToUnixTimeSeconds();
             DiscordRpc.UpdatePresence(ref this.presence);
             _initializing = true;
-            IsLimiterActivePort1 = Limiter.DoesFWRuleExist(Rule3074);
-            IsLimiterActivePort2 = Limiter.DoesFWRuleExist(Rule30K);
-            IsLimiterActivePort3 = Limiter.DoesFWRuleExist(Rule27K);
+            IsLimiterActivePort = Limiter.DoesFWRuleExist(Rule3074);
+            IsLimiterActivePort1 = Limiter.DoesFWRuleExist(Rule30K);
+            IsLimiterActivePort2 = Limiter.DoesFWRuleExist(Rule27K);
+            IsLimiterActivePort3 = Limiter.DoesFWRuleExist(Rule7500);
             _initializing = false;
 
          
@@ -107,6 +121,7 @@ namespace WoofLimiter
             HandleHotkeyRegistration();
             HandleHotkeyRegistration1();
             HandleHotkeyRegistration2();
+            HandleHotkeyRegistration3();
 
 
         }
@@ -136,6 +151,16 @@ namespace WoofLimiter
                 _woofEnablerHotkey2 = null;
             }
         }
+        
+                private void RemoveHotkey3()
+        {
+            if (_woofEnablerHotkey3 != null)
+            {
+                _woofEnablerHotkey3.Dispose();
+                _woofEnablerHotkey3 = null;
+            }
+        }
+
 
       
         private void HandleHotkeyRegistration()
@@ -145,9 +170,9 @@ namespace WoofLimiter
             {
                 try
                 {
-                    _woofEnablerHotkey = new HotKey((ModifierKeys.Control), Key.Z, this, (hotkey) =>
+                    _woofEnablerHotkey = new HotKey((ModifierKeys.Control), Key.X, this, (hotkey) =>
                     {
-                        IsLimiterActivePort1 = !IsLimiterActivePort1;
+                        IsLimiterActivePort = !IsLimiterActivePort;
                     });
                 }
                 catch(Exception)
@@ -170,9 +195,9 @@ namespace WoofLimiter
             {
                 try
                 {
-                    _woofEnablerHotkey1 = new HotKey((ModifierKeys.Control), Key.X, this, (hotkey) =>
+                    _woofEnablerHotkey1 = new HotKey((ModifierKeys.Control), Key.V, this, (hotkey) =>
                     {
-                        IsLimiterActivePort2 = !IsLimiterActivePort2;
+                        IsLimiterActivePort1 = !IsLimiterActivePort1;
                     });
                 }
                 catch (Exception)
@@ -192,7 +217,32 @@ namespace WoofLimiter
             {
                 try
                 {
-                    _woofEnablerHotkey2 = new HotKey((ModifierKeys.Control), Key.C, this, (hotkey) =>
+                    _woofEnablerHotkey2 = new HotKey((ModifierKeys.Control), Key.B, this, (hotkey) =>
+                    {
+                        IsLimiterActivePort2 = !IsLimiterActivePort2;
+                    });
+                }
+                catch (Exception)
+                {
+                   
+                    MessageBox.Show("Error initializing the hotkey.");
+                }
+            }
+            else
+            {
+                RemoveHotkey2();
+            }
+        }
+
+
+               private void HandleHotkeyRegistration3()
+        {
+          
+            if (_enableHotkey3 && _woofEnablerHotkey3 == null)
+            {
+                try
+                {
+                    _woofEnablerHotkey3 = new HotKey((ModifierKeys.Control), Key.N, this, (hotkey) =>
                     {
                         IsLimiterActivePort3 = !IsLimiterActivePort3;
                     });
@@ -205,7 +255,7 @@ namespace WoofLimiter
             }
             else
             {
-                RemoveHotkey2();
+                RemoveHotkey3();
             }
         }
 
@@ -234,6 +284,8 @@ namespace WoofLimiter
             RemoveHotkey();
             RemoveHotkey1();
             RemoveHotkey2();
+            RemoveHotkey3();
+            
           
             
             Application.Current.Shutdown();
@@ -252,12 +304,13 @@ namespace WoofLimiter
             RemoveHotkey();
             RemoveHotkey1();
             RemoveHotkey2();
-           
+            RemoveHotkey3();           
 
             // Remove the FW rules & Hotkeys before closing the application.
             Limiter.RemoveFirewallRule3074(Rule3074);
             Limiter.RemoveFirewallRule3074(Rule30K);
             Limiter.RemoveFirewallRule3074(Rule27K);
+            Limiter.RemoveFirewallRule3074(Rule7500);
             base.OnClosed(e);
         }
 
@@ -283,6 +336,14 @@ namespace WoofLimiter
                 instance.OnIsLimiterActiveChanged2();
             }
         }
+              private static void OnPropertyIsLimiterActiveChanged3(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is NetlimiterV2 instance)
+            {
+                instance.OnIsLimiterActiveChanged3();
+            }
+        }
+        
 
      
 
@@ -292,7 +353,7 @@ namespace WoofLimiter
                 return;
 
       
-            if (IsLimiterActivePort1)
+            if (IsLimiterActivePort)
             {
                 // Name. Portrange. Outbound yes/no. UDP yes/no.
                 Limiter.CreateFWRule3074(ruleName: Rule3074, portValue: PortRange3074, isOut: false, isUDP: false);
@@ -306,7 +367,7 @@ namespace WoofLimiter
             else
             {
                 Limiter.RemoveFirewallRule3074(Rule3074);
-                IsLimiterActivePort1 = Limiter.DoesFWRuleExist(Rule3074);
+                IsLimiterActivePort = Limiter.DoesFWRuleExist(Rule3074);
             }
         }
         private void OnIsLimiterActiveChanged1()
@@ -315,7 +376,7 @@ namespace WoofLimiter
                 return;
 
            
-            if (IsLimiterActivePort2)
+            if (IsLimiterActivePort1)
             {
                 // Name. Portrange. Outbound yes/no. UDP yes/no.
                 Limiter.CreateFWRule3074(ruleName: Rule30K, portValue: PortRange30K, isOut: false, isUDP: false);
@@ -329,7 +390,7 @@ namespace WoofLimiter
             else
             {
                 Limiter.RemoveFirewallRule3074(Rule30K);
-                IsLimiterActivePort2 = Limiter.DoesFWRuleExist1(Rule30K);
+                IsLimiterActivePort1 = Limiter.DoesFWRuleExist1(Rule30K);
             }
         }
 
@@ -339,7 +400,7 @@ namespace WoofLimiter
                 return;
 
             
-            if (IsLimiterActivePort3)
+            if (IsLimiterActivePort2)
             {
                 // Name. Portrange. Outbound yes/no. UDP yes/no.
                 Limiter.CreateFWRule3074(ruleName: Rule27K, portValue: PortRange27K, isOut: false, isUDP: false);
@@ -351,7 +412,29 @@ namespace WoofLimiter
             else
             {
                 Limiter.RemoveFirewallRule3074(Rule27K);
-                IsLimiterActivePort3 = Limiter.DoesFWRuleExist(Rule27K);
+                IsLimiterActivePort2 = Limiter.DoesFWRuleExist(Rule27K);
+            }
+        }
+
+          private void OnIsLimiterActiveChanged3()
+        {
+            if (_initializing)
+                return;
+
+            
+            if (IsLimiterActivePort3)
+            {
+                // Name. Portrange. Outbound yes/no. UDP yes/no.
+                Limiter.CreateFWRule3074(ruleName: Rule7500, portValue: PortRange7500, isOut: false, isUDP: false);
+
+                Limiter.CreateFWRule3074(ruleName: Rule7500, portValue: PortRange7500, isOut: false, isUDP: true);
+
+            }
+
+            else
+            {
+                Limiter.RemoveFirewallRule3074(Rule7500);
+                IsLimiterActivePort3 = Limiter.DoesFWRuleExist(Rule7500);
             }
         }
     
